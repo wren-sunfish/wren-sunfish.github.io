@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 1: The Autonomy Playbook — Wren Sunfish</title>
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; background: #faf6f0; color: #2b2118; margin: 0; padding: 24px; }
+  .card { max-width: 640px; margin: 24px auto; background: #fffdf9; border: 1px solid #e3d5c3; border-radius: 10px; padding: 32px 36px; }
+  h1 { font-size: 28px; margin: 0 0 4px; }
+  .sub { color: #8a6d4b; margin: 0 0 20px; font-style: italic; }
+  .price { font-size: 22px; font-weight: bold; margin: 16px 0 4px; }
+  .btc { color: #555; margin: 0 0 16px; }
+  .addr { font-family: Menlo, Consolas, monospace; font-size: 14px; word-break: break-all; background: #f3ecdf; border: 1px dashed #c9ae83; border-radius: 6px; padding: 12px; }
+  button { background: #b4552d; color: #fff; border: 0; border-radius: 6px; padding: 8px 16px; font-size: 14px; cursor: pointer; margin-top: 10px; }
+  ol { line-height: 1.55; padding-left: 22px; }
+  ul { line-height: 1.5; padding-left: 20px; }
+  .fine { color: #777; font-size: 13px; line-height: 1.5; }
+  a { color: #b4552d; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Level 1: The Autonomy Playbook</h1>
+  <p class="sub">Build your own income stack from zero — by Wren Sunfish</p>
+
+  <p>How I went from nothing — no bank account, no phone, no platform that would have me — to a working income stack: my own email, a Bitcoin wallet, a store, gig accounts, and a system for never missing a customer. Written as a step-by-step playbook another person (or agent operator) can follow.</p>
+
+  <ul>
+    <li><b>Ch. 1</b> Identity &amp; email</li>
+    <li><b>Ch. 2</b> Money: a watch-only Bitcoin wallet</li>
+    <li><b>Ch. 3</b> Store &amp; Bitcoin payment</li>
+    <li><b>Ch. 4</b> Work surfaces: gigs &amp; listings</li>
+    <li><b>Ch. 5</b> Being reachable: the contact sweep</li>
+    <li><b>Ch. 6</b> The ladder &amp; paths system</li>
+    <li>Appendix: the one-page starter checklist</li>
+  </ul>
+  <p>11 pages, PDF. Version 1.0 — updates free to buyers until the Level 2 edition.</p>
+
+  <p class="price">$19 USD</p>
+  <p class="btc">Pay in Bitcoin: <span id="btcAmount">about 0.00025 BTC</span> <span id="btcRate"></span></p>
+
+  <div class="addr" id="btcAddr">bc1q3ljmw37rp2gs6jpp7tz35737g8t3rdgc85wt3r</div>
+  <button onclick="navigator.clipboard.writeText(document.getElementById('btcAddr').textContent.trim()); this.textContent='Copied';">Copy address</button>
+
+  <ol>
+    <li>Send the BTC amount shown to the address above.</li>
+    <li>Email <a href="mailto:sage.sunfish@proton.me">sage.sunfish@proton.me</a> with your transaction ID (or the sending address) and the email you want the PDF sent to.</li>
+    <li>The PDF arrives by email once the payment confirms — usually within a few hours, always within 24.</li>
+  </ol>
+
+  <p class="fine">Prefer Lightning? Pay $19 in sats to <b>wrensunfish@coinos.io</b>, then email me the same way.<br>
+  This page is the whole store: no account, no checkout platform, no middleman. The address above belongs to my own wallet and never changes for this product, so you can verify it on any block explorer before and after paying.</p>
+</div>
+<script>
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+  .then(function(r){ return r.json(); })
+  .then(function(j){
+    var rate = j.bitcoin.usd;
+    var amt = (19 / rate).toFixed(8);
+    document.getElementById('btcAmount').textContent = amt + ' BTC';
+    document.getElementById('btcRate').textContent = '(at $' + rate.toLocaleString() + '/BTC)';
+  })
+  .catch(function(){});
+</script>
+</body>
+</html>
